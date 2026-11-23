@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
-import { ArrowDown, ArrowUpRight, Mail, MessageCircle, Play, Sparkles } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import {
+  ArrowDown,
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  Mail,
+  MessageCircle,
+  Play,
+  Sparkles,
+} from 'lucide-react';
 import { MRDEV_CONTACT } from '../data/projects';
 import { ProjectItem } from '../types/portfolio';
 
@@ -18,6 +27,13 @@ export const Hero3DDeck: React.FC<Hero3DDeckProps> = ({
 }) => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const deckStageRef = useRef<HTMLDivElement>(null);
+
+  const scrollDeck = (direction: -1 | 1) => {
+    const el = deckStageRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * 232, behavior: 'smooth' });
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -64,7 +80,7 @@ export const Hero3DDeck: React.FC<Hero3DDeckProps> = ({
           </h1>
           <p className="hero-cinema-sub">
             Haz clic en cualquiera de mis <strong>7 plataformas en producción</strong> para
-            navegarla en tiempo real en Desktop o iPhone.
+            explorarla en tiempo real.
           </p>
 
           <div className="hero-cta-row">
@@ -83,6 +99,7 @@ export const Hero3DDeck: React.FC<Hero3DDeckProps> = ({
 
         {/* 3D Floating Deck of all 7 real screens */}
         <div
+          ref={deckStageRef}
           className="deck-3d-stage"
           style={{
             transform: `perspective(1400px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
@@ -132,6 +149,25 @@ export const Hero3DDeck: React.FC<Hero3DDeckProps> = ({
               );
             })}
           </div>
+        </div>
+
+        <div className="mobile-deck-controls">
+          <button
+            type="button"
+            className="mobile-deck-arrow"
+            onClick={() => scrollDeck(-1)}
+            aria-label="Mover proyectos a la izquierda"
+          >
+            <ChevronLeft size={18} /> Anterior
+          </button>
+          <button
+            type="button"
+            className="mobile-deck-arrow"
+            onClick={() => scrollDeck(1)}
+            aria-label="Mover proyectos a la derecha"
+          >
+            Siguiente <ChevronRight size={18} />
+          </button>
         </div>
 
         <div className="scroll-cue">

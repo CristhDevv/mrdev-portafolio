@@ -362,6 +362,10 @@ body {
   color: #94a3b8;
 }
 
+.mobile-deck-controls {
+  display: none;
+}
+
 .scroll-cue {
   display: flex;
   align-items: center;
@@ -1246,12 +1250,34 @@ body {
     height: auto;
     display: block;
     transform: none !important;
-    margin: 0 -14px 20px;
-    padding: 10px 14px 16px;
+    margin: 0 -14px 12px;
+    padding: 10px 14px 14px;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
+    touch-action: pan-x pan-y;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+  }
+
+  .mobile-deck-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .mobile-deck-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.07);
+    color: #f8fafc;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
   }
 
   .deck-3d-stage::-webkit-scrollbar {
