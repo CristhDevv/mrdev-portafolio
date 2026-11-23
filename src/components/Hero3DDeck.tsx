@@ -110,6 +110,7 @@ export const Hero3DDeck: React.FC<Hero3DDeckProps> = ({
               const centerOffset = idx - 3; // -3 .. +3
               const isActive = proj.id === activeProjectId;
               const isHovered = hoveredIdx === idx;
+              const isFeatured = isHovered || (hoveredIdx === null && isActive);
               const baseTranslateX = centerOffset * 128;
               const baseTranslateZ = -Math.abs(centerOffset) * 55;
               const baseRotateY = centerOffset * -9;
@@ -119,16 +120,16 @@ export const Hero3DDeck: React.FC<Hero3DDeckProps> = ({
                 <button
                   key={proj.id}
                   type="button"
-                  className={`deck-card ${isActive ? 'active' : ''}`}
+                  className={`deck-card ${isFeatured ? 'active' : ''}`}
                   onMouseEnter={() => setHoveredIdx(idx)}
                   onMouseLeave={() => setHoveredIdx(null)}
                   onClick={() => onSelectProject(proj)}
                   style={
                     {
                       '--deck-accent': proj.accentColor,
-                      zIndex: isHovered ? 30 : isActive ? 20 : 10 - Math.abs(centerOffset),
-                      transform: isHovered
-                        ? `translateX(${baseTranslateX}px) translateY(-34px) translateZ(95px) scale(1.1) rotateY(0deg)`
+                      zIndex: isHovered ? 40 : isActive ? 30 : 10 - Math.abs(centerOffset),
+                      transform: isFeatured
+                        ? `translateX(${baseTranslateX}px) translateY(-34px) translateZ(150px) scale(1.1) rotateY(0deg) rotateZ(0deg)`
                         : `translateX(${baseTranslateX}px) translateZ(${baseTranslateZ}px) rotateY(${baseRotateY}deg) rotateZ(${baseRotateZ}deg)`,
                     } as React.CSSProperties
                   }
