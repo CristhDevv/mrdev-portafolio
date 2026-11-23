@@ -230,6 +230,8 @@ export const LiveAppStage: React.FC<LiveAppStageProps> = ({
                   title={`${project.name} en vivo`}
                   className="live-iframe"
                   loading="eager"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  referrerPolicy="no-referrer"
                 />
               )}
 

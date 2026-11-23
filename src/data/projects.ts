@@ -108,6 +108,7 @@ export const PROJECTS: ProjectItem[] = [
     screenshotPath: '/screenshots/secop-sie.png',
     accentColor: '#f59e0b',
     secondaryGlow: '#d97706',
+    iframeBlocked: true,
     kpis: [
       { label: 'Motor Auditoría', value: '10 Reglas Forenses' },
       { label: 'Radar Licitaciones', value: 'Cartas Ley 80 en 1 Clic' },
@@ -197,6 +198,7 @@ export const PROJECTS: ProjectItem[] = [
     screenshotPath: '/screenshots/tesorapp.png',
     accentColor: '#06b6d4',
     secondaryGlow: '#0284c7',
+    iframeBlocked: true,
     kpis: [
       { label: 'Arquitectura', value: 'NestJS + Prisma + React' },
       { label: 'Gobierno & Roles', value: '4 Perfiles Jerárquicos' },
