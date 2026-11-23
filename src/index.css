@@ -1247,8 +1247,13 @@ body {
 
   /* Convert 3D fan into a smooth horizontal swipeable deck on mobile */
   .deck-3d-stage {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    place-items: normal !important;
+    width: calc(100% + 28px);
     height: auto;
-    display: block;
     transform: none !important;
     margin: 0 -14px 12px;
     padding: 10px 14px 14px;
@@ -1288,7 +1293,10 @@ body {
     width: max-content;
     height: auto;
     display: flex;
+    flex-shrink: 0;
     gap: 12px;
+    margin: 0;
+    transform: none !important;
     transform-style: flat;
   }
 
