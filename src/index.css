@@ -276,6 +276,7 @@ body {
   place-items: center;
   transition: transform 0.18s ease-out;
   transform-style: preserve-3d;
+  pointer-events: none;
   margin-bottom: 24px;
 }
 
@@ -284,6 +285,7 @@ body {
   width: 260px;
   height: 220px;
   transform-style: preserve-3d;
+  pointer-events: none;
 }
 
 .deck-card {
@@ -296,6 +298,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.78);
   cursor: pointer;
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -1252,6 +1255,7 @@ body {
     justify-content: flex-start !important;
     align-items: stretch !important;
     place-items: normal !important;
+    pointer-events: auto !important;
     width: calc(100% + 28px);
     height: auto;
     transform: none !important;

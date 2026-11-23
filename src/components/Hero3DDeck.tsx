@@ -112,7 +112,7 @@ export const Hero3DDeck: React.FC<Hero3DDeckProps> = ({
               const isHovered = hoveredIdx === idx;
               const isFeatured = isHovered || (hoveredIdx === null && isActive);
               const baseTranslateX = centerOffset * 128;
-              const baseTranslateZ = -Math.abs(centerOffset) * 55;
+              const baseTranslateZ = (3 - Math.abs(centerOffset)) * 38;
               const baseRotateY = centerOffset * -9;
               const baseRotateZ = centerOffset * 1.4;
 
@@ -129,7 +129,7 @@ export const Hero3DDeck: React.FC<Hero3DDeckProps> = ({
                       '--deck-accent': proj.accentColor,
                       zIndex: isHovered ? 40 : isActive ? 30 : 10 - Math.abs(centerOffset),
                       transform: isFeatured
-                        ? `translateX(${baseTranslateX}px) translateY(-34px) translateZ(150px) scale(1.1) rotateY(0deg) rotateZ(0deg)`
+                        ? `translateX(${baseTranslateX}px) translateY(-34px) translateZ(240px) scale(1.1) rotateY(0deg) rotateZ(0deg)`
                         : `translateX(${baseTranslateX}px) translateZ(${baseTranslateZ}px) rotateY(${baseRotateY}deg) rotateZ(${baseRotateZ}deg)`,
                     } as React.CSSProperties
                   }
