@@ -584,6 +584,11 @@ body {
   cursor: pointer;
 }
 
+/* MOBILE DIRECT LINK CARD (Hidden on desktop) */
+.mobile-direct-link-card {
+  display: none;
+}
+
 /* DEVICE ARENA */
 .device-arena {
   position: relative;
@@ -1287,48 +1292,44 @@ body {
     justify-content: center;
   }
 
-  .studio-toolbar {
+  .studio-toolbar,
+  .device-arena {
+    display: none;
+  }
+
+  .mobile-direct-link-card {
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
+    gap: 12px;
+    padding: 18px 16px;
+    margin: 12px 0 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(12px);
+    text-align: center;
   }
 
-  .studio-group {
-    width: 100%;
-    justify-content: space-between;
+  .mobile-direct-url {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: #cbd5e1;
+    word-break: break-all;
   }
 
-  .studio-btn {
-    flex: 1;
+  .mobile-direct-cta {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    padding: 8px 8px;
-    font-size: 12px;
-  }
-
-  .studio-reload-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .macbook-viewport {
-    height: 52vh;
-    min-height: 300px;
-  }
-
-  .iphone-chassis {
-    width: min(330px, 100%);
-    height: 580px;
-    border-radius: 42px;
-    padding: 10px;
-  }
-
-  .iphone-screen {
-    border-radius: 32px;
-  }
-
-  .iphone-island {
-    width: 90px;
-    height: 22px;
-    top: 18px;
+    gap: 8px;
+    padding: 13px 18px;
+    border-radius: 12px;
+    background: var(--stage-accent);
+    color: #030712;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    box-shadow: 0 0 24px -4px var(--stage-accent);
   }
 
   .glass-drawer {

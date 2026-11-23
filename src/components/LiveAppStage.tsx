@@ -9,7 +9,6 @@ import {
   MonitorPlay,
   RotateCw,
   ShieldAlert,
-  Smartphone,
   Sparkles,
   X,
 } from 'lucide-react';
@@ -150,13 +149,6 @@ export const LiveAppStage: React.FC<LiveAppStageProps> = ({
             </button>
             <button
               type="button"
-              className={`studio-btn ${device === 'iphone' ? 'active' : ''}`}
-              onClick={() => setDevice('iphone')}
-            >
-              <Smartphone size={15} /> iPhone 16
-            </button>
-            <button
-              type="button"
               className={`studio-btn ${device === 'cinema' ? 'active' : ''}`}
               onClick={() => setDevice('cinema')}
             >
@@ -174,7 +166,20 @@ export const LiveAppStage: React.FC<LiveAppStageProps> = ({
           </button>
         </div>
 
-        {/* THE DEVICE FRAME (85% of attention) */}
+        {/* Mobile-Only Direct Web Link Card (no embedded screen on mobile) */}
+        <div className="mobile-direct-link-card">
+          <span className="mobile-direct-url">https://{project.displayUrl}</span>
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-direct-cta"
+          >
+            Abrir {project.name} en Vivo <ExternalLink size={16} />
+          </a>
+        </div>
+
+        {/* THE DEVICE FRAME (Desktop / Cinema) */}
         <div
           className={`device-arena mode-${device}`}
           onMouseMove={handleStageMove}
@@ -182,107 +187,77 @@ export const LiveAppStage: React.FC<LiveAppStageProps> = ({
         >
           <div className="arena-ambient-glow" />
 
-          {device === 'iphone' ? (
-            <div
-              className="iphone-chassis"
-              style={
-                effectiveStageView === 'hd'
-                  ? { transform: `perspective(1200px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)` }
-                  : undefined
-              }
-            >
-              <div className="iphone-island" />
-              <div className="iphone-screen">
-                {effectiveStageView === 'live' ? (
-                  <iframe
-                    key={`${project.id}-mobile-${iframeKey}`}
-                    src={project.url}
-                    title={`${project.name} móvil en vivo`}
-                    className="live-iframe"
-                    loading="eager"
-                  />
-                ) : (
-                  <img
-                    src={project.screenshotPath}
-                    alt={`${project.name} vista HD`}
-                    className="hd-screen-img"
-                  />
-                )}
+          <div
+            className={`macbook-chassis ${device === 'cinema' ? 'cinema' : ''}`}
+            style={
+              effectiveStageView === 'hd'
+                ? { transform: `perspective(1400px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)` }
+                : undefined
+            }
+          >
+            <div className="macbook-topbar">
+              <div className="traffic-lights">
+                <span />
+                <span />
+                <span />
               </div>
+              <div className="macbook-address-bar">
+                <span className="live-dot-mini" />
+                <span>https://{project.displayUrl}</span>
+              </div>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="macbook-ext"
+              >
+                <ExternalLink size={13} />
+              </a>
             </div>
-          ) : (
-            <div
-              className={`macbook-chassis ${device === 'cinema' ? 'cinema' : ''}`}
-              style={
-                effectiveStageView === 'hd'
-                  ? { transform: `perspective(1400px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)` }
-                  : undefined
-              }
-            >
-              <div className="macbook-topbar">
-                <div className="traffic-lights">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <div className="macbook-address-bar">
-                  <span className="live-dot-mini" />
-                  <span>https://{project.displayUrl}</span>
-                </div>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="macbook-ext"
-                >
-                  <ExternalLink size={13} />
-                </a>
-              </div>
 
-              <div className="macbook-viewport">
-                {/* Preloaded screenshot underneath so it never looks blank while iframe loads */}
-                <img
-                  src={project.screenshotPath}
-                  alt={project.name}
-                  className="viewport-backdrop-img"
+            <div className="macbook-viewport">
+              {/* Preloaded screenshot underneath so it never looks blank while iframe loads */}
+              <img
+                src={project.screenshotPath}
+                alt={project.name}
+                className="viewport-backdrop-img"
+              />
+
+              {effectiveStageView === 'live' && (
+                <iframe
+                  key={`${project.id}-desktop-${iframeKey}`}
+                  src={project.url}
+                  title={`${project.name} en vivo`}
+                  className="live-iframe"
+                  loading="eager"
                 />
+              )}
 
-                {effectiveStageView === 'live' && (
-                  <iframe
-                    key={`${project.id}-desktop-${iframeKey}`}
-                    src={project.url}
-                    title={`${project.name} en vivo`}
-                    className="live-iframe"
-                    loading="eager"
-                  />
-                )}
+              {project.iframeBlocked && (
+                <div className="login-wall-chip">
+                  <ShieldAlert size={13} />
+                  <span>
+                    Vista HD en vivo (el dominio protege contra iframe) ·{' '}
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontWeight: 700 }}>
+                      Abrir {project.displayUrl} ↗
+                    </a>
+                  </span>
+                </div>
+              )}
 
-                {project.iframeBlocked && (
-                  <div className="login-wall-chip">
-                    <ShieldAlert size={13} />
-                    <span>
-                      Vista HD en vivo (el dominio protege contra iframe) ·{' '}
-                      <a href={project.url} target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontWeight: 700 }}>
-                        Abrir {project.displayUrl} ↗
-                      </a>
-                    </span>
-                  </div>
-                )}
-
-                {project.hasLoginWall && (
-                  <div className="login-wall-chip">
-                    <ShieldAlert size={13} />
-                    <span>
-                      Acceso privado con usuario/rol ·{' '}
-                      <button type="button" onClick={() => setDrawerOpen(true)}>
-                        Ver módulos internos
-                      </button>
-                    </span>
-                  </div>
-                )}
-              </div>
+              {project.hasLoginWall && (
+                <div className="login-wall-chip">
+                  <ShieldAlert size={13} />
+                  <span>
+                    Acceso privado con usuario/rol ·{' '}
+                    <button type="button" onClick={() => setDrawerOpen(true)}>
+                      Ver módulos internos
+                    </button>
+                  </span>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
 
         {/* Ultra-clean 4 feature chips below the screen */}

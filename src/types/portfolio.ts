@@ -7,7 +7,7 @@ export type ProjectId =
   | 'misapuntesu'
   | 'pidefacil';
 
-export type DeviceMode = 'desktop' | 'iphone' | 'cinema';
+export type DeviceMode = 'desktop' | 'cinema';
 
 export type StageViewMode = 'live' | 'hd';
 
