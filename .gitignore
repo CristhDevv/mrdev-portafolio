@@ -4,5 +4,5 @@ dist
 .env
 .env.*
 *.log
-
-.vercel
+connectors/*/node_modules
+connectors/*/dist

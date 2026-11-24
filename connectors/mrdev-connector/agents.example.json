@@ -1,0 +1,26 @@
+{
+  "allowedRootPaths": [
+    "C:\\Users\\USER\\Desktop\\workspace"
+  ],
+  "agents": [
+    {
+      "slug": "claude-dev",
+      "name": "Claude Code Developer",
+      "specialty": "Desarrollo de software",
+      "adapter_type": "cli-subprocess",
+      "capabilities": ["code", "terminal", "files"],
+      "tools": ["git", "npm", "cli"],
+      "command": "node",
+      "args": ["-e", "console.log('Agente CLI listo')"]
+    },
+    {
+      "slug": "local-researcher",
+      "name": "Agente HTTP Local",
+      "specialty": "Investigación y análisis",
+      "adapter_type": "local-http",
+      "capabilities": ["api", "documents"],
+      "tools": ["http"],
+      "endpoint": "http://127.0.0.1:8787/task"
+    }
+  ]
+}

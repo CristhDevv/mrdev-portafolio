@@ -1,0 +1,22 @@
+{
+  "name": "mrdev-connector",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "mrdev-connector": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js start"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/ws": "^8.5.14",
+    "typescript": "^5.8.3"
+  }
+}

@@ -27,10 +27,19 @@ jobs:
 
       - name: Check for potential committed secrets
         run: |
-          if grep -rnE "(ghp_[A-Za-z0-9]{20,}|vcp_[A-Za-z0-9]{20,}|eyJhbGciOi|AIzaSy[A-Za-z0-9_-]{20,}|SUPABASE_SERVICE_ROLE_KEY\s*=)" src/ public/ index.html vercel.json; then
+          if grep -rnE "(ghp_[A-Za-z0-9]{20,}|vcp_[A-Za-z0-9]{20,}|eyJhbGciOi|AIzaSy[A-Za-z0-9_-]{20,}|SUPABASE_SERVICE_ROLE_KEY\s*=)" src/ api/ public/ index.html vercel.json; then
             echo "Potential secret detected in source!"
             exit 1
           fi
+
+      - name: Typecheck API serverless layer
+        run: npx tsc -p tsconfig.api.json --noEmit
+
+      - name: Run Ops security & DAG unit tests
+        run: npx tsx --test tests/ops/*.test.ts
+
+      - name: Build local connector
+        run: cd connectors/mrdev-connector && npm ci && npm run build
 
       - name: Verify TypeScript and production build
         run: npm run build
