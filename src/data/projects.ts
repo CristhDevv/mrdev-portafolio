@@ -23,6 +23,7 @@ export const PROJECTS: ProjectItem[] = [
     screenshotPath: '/screenshots/mr-tender.png',
     accentColor: '#10b981',
     secondaryGlow: '#059669',
+    iframeBlocked: true,
     kpis: [
       { label: 'Plan Todo Incluido', value: '$30.000 / mes' },
       { label: 'Inventario Vivo', value: 'Kardex Multi-Bodega' },
