@@ -18,10 +18,12 @@ export const MachinesView: React.FC<MachinesViewProps> = ({
   const [osType, setOsType] = useState('windows');
   const [rootPath, setRootPath] = useState('C:\\Users\\USER\\Desktop\\workspace');
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
+    setError(null);
     try {
       const res = await opsApi.createMachine({
         custom_name: name,
@@ -31,6 +33,8 @@ export const MachinesView: React.FC<MachinesViewProps> = ({
       setName('');
       onShowPairing(res.pairing);
       onRefresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al registrar la máquina');
     } finally {
       setBusy(false);
     }
@@ -58,9 +62,11 @@ export const MachinesView: React.FC<MachinesViewProps> = ({
           onChange={(e) => setRootPath(e.target.value)}
         />
         <button type="submit" className="ops-primary-btn" disabled={busy}>
-          <Plus size={15} /> Registrar Máquina
+          <Plus size={15} /> {busy ? 'Registrando...' : 'Registrar Máquina'}
         </button>
       </form>
+
+      {error && <div className="ops-error-box">{error}</div>}
 
       <div className="ops-cards-grid">
         {machines.length === 0 ? (
@@ -96,8 +102,13 @@ export const MachinesView: React.FC<MachinesViewProps> = ({
                   type="button"
                   className="ops-ghost-btn"
                   onClick={async () => {
-                    const p = await opsApi.rotatePairingToken(m.id);
-                    onShowPairing(p);
+                    try {
+                      setError(null);
+                      const p = await opsApi.rotatePairingToken(m.id);
+                      onShowPairing(p);
+                    } catch (err) {
+                      setError(err instanceof Error ? err.message : 'Error generando token');
+                    }
                   }}
                 >
                   <KeyRound size={14} /> Nuevo Token
@@ -107,8 +118,13 @@ export const MachinesView: React.FC<MachinesViewProps> = ({
                     type="button"
                     className="ops-danger-btn sm"
                     onClick={async () => {
-                      await opsApi.revokeMachine(m.id, 'Revocación manual desde panel');
-                      onRefresh();
+                      try {
+                        setError(null);
+                        await opsApi.revokeMachine(m.id, 'Revocación manual desde panel');
+                        onRefresh();
+                      } catch (err) {
+                        setError(err instanceof Error ? err.message : 'Error revocando máquina');
+                      }
                     }}
                   >
                     <ShieldOff size={14} /> Kill Switch

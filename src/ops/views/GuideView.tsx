@@ -22,9 +22,9 @@ export const GuideView: React.FC = () => {
             <code>Máquinas</code>
           </div>
           <p className="ops-muted">
-            Ve a <strong>Máquinas</strong>, escribe un nombre (ej. <em>Mi PC Principal</em>) y pulsa{' '}
+            Ve a <strong>Máquinas</strong>, escribe un nombre (ej. <em>cris1</em>) y pulsa{' '}
             <strong>Registrar Máquina</strong>. Copia el comando único que aparece y ejecútalo una sola
-            vez en ese computador dentro de <code>connectors/mrdev-connector</code>:
+            vez en ese computador dentro de la carpeta del conector local (ej. <code>C:\mrdev-connector</code> o <code>connectors/mrdev-connector</code>):
           </p>
           <pre className="ops-code-block" style={{ marginBottom: 0 }}>
             node dist/cli.js pair --server https://mrdev.lat --token TU_TOKEN{'\n'}

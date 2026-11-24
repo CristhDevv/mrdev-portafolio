@@ -67,7 +67,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       pairing: {
         otp_token: rawOtp,
         expires_at: expiresAt,
-        cli_command: `npx mrdev-connector pair --server https://mrdev.lat --token ${rawOtp}`,
+        cli_command: `node dist/cli.js pair --server https://mrdev.lat --token ${rawOtp}`,
       },
     });
   }

@@ -314,3 +314,12 @@ END $$;
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('ops-artifacts', 'ops-artifacts', false)
 ON CONFLICT (id) DO NOTHING;
+
+-- Privilegios explícitos para service_role, authenticated (solo lectura Realtime) y 0 acceso para anon
+REVOKE ALL ON ALL TABLES IN SCHEMA public FROM anon;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO service_role;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO service_role;
+GRANT SELECT ON ops_machines, ops_agents, ops_workspaces, ops_workspace_members,
+  ops_conversations, ops_messages, ops_workflows, ops_tasks,
+  ops_approval_requests, ops_artifacts, ops_activity_events TO authenticated;
+
