@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Activity,
   ArrowLeft,
+  BookOpen,
   Bot,
   FolderGit2,
   GitBranch,
@@ -17,6 +18,7 @@ import {
 
 export type OpsTab =
   | 'overview'
+  | 'guide'
   | 'machines'
   | 'agents'
   | 'workspaces'
@@ -40,6 +42,7 @@ interface OpsLayoutProps {
 
 const NAV_ITEMS: Array<{ id: OpsTab; label: string; icon: React.ReactNode }> = [
   { id: 'overview', label: 'Resumen', icon: <LayoutDashboard size={16} /> },
+  { id: 'guide', label: 'Guía de Uso', icon: <BookOpen size={16} /> },
   { id: 'machines', label: 'Máquinas', icon: <Monitor size={16} /> },
   { id: 'agents', label: 'Agentes', icon: <Bot size={16} /> },
   { id: 'workspaces', label: 'Espacios', icon: <Users size={16} /> },

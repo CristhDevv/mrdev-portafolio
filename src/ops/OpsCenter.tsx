@@ -10,6 +10,7 @@ import { OpsOverviewResponse } from './types/ops';
 import { AgentsView } from './views/AgentsView';
 import { ArtifactsView } from './views/ArtifactsView';
 import { CommsView } from './views/CommsView';
+import { GuideView } from './views/GuideView';
 import { HistoryView } from './views/HistoryView';
 import { LiveActivityView } from './views/LiveActivityView';
 import { MachinesView } from './views/MachinesView';
@@ -103,6 +104,7 @@ export const OpsCenter: React.FC<OpsCenterProps> = ({ onExitOps }) => {
             }}
           />
         )}
+        {activeTab === 'guide' && <GuideView />}
         {activeTab === 'machines' && (
           <MachinesView
             machines={overview.machines}
