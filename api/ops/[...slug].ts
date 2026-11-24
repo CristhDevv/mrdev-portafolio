@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from './_lib/httpTypes.js';
 import agentsIdHandler from './_handlers/agents/[id].js';
 import agentsHandler from './_handlers/agents/index.js';
 import approvalDecisionHandler from './_handlers/approvals/[id]/decision.js';

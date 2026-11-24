@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '../../_lib/httpTypes.js';
 import { requireConnector } from '../../_lib/connectorAuth.js';
 import { heartbeatSchema } from '../../_lib/schemas.js';
 import { getSupabaseAdmin } from '../../_lib/supabaseAdmin.js';

@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '../../../_lib/httpTypes.js';
 import { requireAdmin } from '../../../_lib/adminAuth.js';
 import { recordAuditAndEvent } from '../../../_lib/auditLogger.js';
 import { getSupabaseAdmin } from '../../../_lib/supabaseAdmin.js';

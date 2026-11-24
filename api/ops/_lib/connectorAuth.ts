@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from './httpTypes.js';
 import { getSupabaseAdmin } from './supabaseAdmin.js';
 
 export const REPLAY_WINDOW_MS = 60_000;
