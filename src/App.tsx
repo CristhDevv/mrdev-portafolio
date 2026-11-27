@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ContactModal } from './components/ContactModal';
 import { Hero3DDeck } from './components/Hero3DDeck';
 import { LiveAppStage } from './components/LiveAppStage';
@@ -6,31 +6,10 @@ import { MacDock } from './components/MacDock';
 import { MRDEV_CONTACT, PROJECTS } from './data/projects';
 import { ProjectItem } from './types/portfolio';
 
-const OpsCenter = lazy(() => import('./ops/OpsCenter'));
-
 export function App() {
-  const [isOpsRoute, setIsOpsRoute] = useState(() =>
-    typeof window !== 'undefined' && window.location.pathname.startsWith('/ops'),
-  );
   const [activeIndex, setActiveIndex] = useState(0);
   const [contactOpen, setContactOpen] = useState(false);
   const [cursor, setCursor] = useState({ x: 50, y: 20 });
-
-  const openOps = () => {
-    window.history.pushState({}, '', '/ops');
-    setIsOpsRoute(true);
-  };
-
-  const exitOps = () => {
-    window.history.pushState({}, '', '/');
-    setIsOpsRoute(false);
-  };
-
-  useEffect(() => {
-    const onPop = () => setIsOpsRoute(window.location.pathname.startsWith('/ops'));
-    window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
-  }, []);
 
   const activeProject = PROJECTS[activeIndex];
 
@@ -50,22 +29,13 @@ export function App() {
   };
 
   useEffect(() => {
-    if (isOpsRoute) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') setActiveIndex((p) => (p + 1) % PROJECTS.length);
       if (e.key === 'ArrowLeft') setActiveIndex((p) => (p - 1 + PROJECTS.length) % PROJECTS.length);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [isOpsRoute]);
-
-  if (isOpsRoute) {
-    return (
-      <Suspense fallback={<div style={{ padding: 32, color: '#94a3b8' }}>Cargando Ops Center...</div>}>
-        <OpsCenter onExitOps={exitOps} />
-      </Suspense>
-    );
-  }
+  }, []);
 
   return (
     <div
@@ -132,7 +102,6 @@ export function App() {
         onSelectProject={handleSelectProject}
         onScrollTop={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         onOpenContact={() => setContactOpen(true)}
-        onOpenOps={openOps}
       />
 
       <ContactModal

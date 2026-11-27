@@ -4,5 +4,3 @@ dist
 .env
 .env.*
 *.log
-connectors/*/node_modules
-connectors/*/dist

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, LayoutGrid, Mail, MessageCircle } from 'lucide-react';
+import { LayoutGrid, Mail, MessageCircle } from 'lucide-react';
 import { MRDEV_CONTACT } from '../data/projects';
 import { ProjectItem } from '../types/portfolio';
 
@@ -9,7 +9,6 @@ interface MacDockProps {
   onSelectProject: (project: ProjectItem) => void;
   onScrollTop: () => void;
   onOpenContact: () => void;
-  onOpenOps?: () => void;
 }
 
 export const MacDock: React.FC<MacDockProps> = ({
@@ -18,7 +17,6 @@ export const MacDock: React.FC<MacDockProps> = ({
   onSelectProject,
   onScrollTop,
   onOpenContact,
-  onOpenOps,
 }) => {
   return (
     <div className="mac-dock-wrap" aria-label="Dock de proyectos mrdev">
@@ -76,18 +74,6 @@ export const MacDock: React.FC<MacDockProps> = ({
           <Mail size={18} />
           <span className="dock-tooltip">Contacto</span>
         </button>
-
-        {onOpenOps && (
-          <button
-            type="button"
-            className="dock-item"
-            onClick={onOpenOps}
-            title="mrdev Ops Center"
-          >
-            <Cpu size={18} />
-            <span className="dock-tooltip">Ops Center</span>
-          </button>
-        )}
       </div>
     </div>
   );
